@@ -1,3 +1,34 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: vazir;
+  src: url('/assets/fonts/vazir-font-v29.1.0/Vazir-Bold.eot');
+  src: url('/assets/fonts/vazir-font-v29.1.0/Vazir-Bold.woff') format('woff');
+  src: url('/assets/fonts/vazir-font-v29.1.0/Vazir-Bold.ttf') format('truetype');
+  src: url('/assets/fonts/vazir-font-v29.1.0/Vazir-Black.eot');
+  src: url('/assets/fonts/vazir-font-v29.1.0/Vazir-Black.woff') format('woff');
+  src: url('/assets/fonts/vazir-font-v29.1.0/Vazir-Black.ttf') format('truetype');
+  src: url('/assets/fonts/vazir-font-v29.1.0/Vazir-Light.eot');
+  src: url('/assets/fonts/vazir-font-v29.1.0/Vazir-Light.woff') format('woff');
+  src: url('/assets/fonts/vazir-font-v29.1.0/Vazir-Light.ttf') format('truetype');
+  src: url('/assets/fonts/vazir-font-v29.1.0/Vazir-Regular.eot');
+  src: url('/assets/fonts/vazir-font-v29.1.0/Vazir-Regular.woff') format('woff');
+  src: url('/assets/fonts/vazir-font-v29.1.0/Vazir-Regular.ttf') format('truetype');
+  src: url('/assets/fonts/vazir-font-v29.1.0/Vazir-Medium.eot');
+  src: url('/assets/fonts/vazir-font-v29.1.0/Vazir-Medium.woff') format('woff');
+  src: url('/assets/fonts/vazir-font-v29.1.0/Vazir-Medium.ttf') format('truetype');
+  src: url('/assets/fonts/vazir-font-v29.1.0/Vazir-Thin.eot');
+  src: url('/assets/fonts/vazir-font-v29.1.0/Vazir-Thin.woff') format('woff');
+  src: url('/assets/fonts/vazir-font-v29.1.0/Vazir-Thin.ttf') format('truetype');
+  src: url('/assets/fonts/vazir-font-v29.1.0/Vazir-Variable.eot');
+  src: url('/assets/fonts/vazir-font-v29.1.0/Vazir-Variable.woff') format('woff');
+  src: url('/assets/fonts/vazir-font-v29.1.0/Vazir-Variable.ttf') format('truetype');
+}
+
+
+* {
+  font-family: 'vazir';
+  font-weight:normal;
+}

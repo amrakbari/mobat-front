@@ -1,21 +1,29 @@
-<div class="  bg-white relative flex flex-col m-6 space-y-10 shadow-2xl rounded-2xl md:flex-row md:space-y-0 md:m-0">
-  <div class="flex flex-col space-y-4 p-6 md:p-20">
-    <h2 class="font-mono mb-5 text-4xl font-bold">
-      ثبت نام
-    </h2>
-    <input type="text" placeholder="Email" class="input input-bordered input-accent w-full md:min-w-[400px]" />
-    <input type="text" placeholder="First Name" class="input input-bordered input-accent w-full md:min-w-[400px]" />
-    <input type="text" placeholder="Last Name" class="input input-bordered input-accent w-full md:min-w-[400px]" />
-    <input type="date" placeholder="Birth Date" class="input input-bordered input-accent w-full md:min-w-[400px]" />
-    <select class="select select-accent w-full max-w-xs md:min-w-[400px]">
-      <option disabled selected>به چه عنوانی وارد میشوید</option>
-      <option>کاربر معمولی</option>
-      <option>خدمات دهنده</option>
-    </select>
-    <div class="flex flex-row justify-start">
-      <button class="btn btn-accent">Button</button>
-    </div>
+<div class="flex items-center justify-center h-screen">
+  <div class="bg-white relative flex flex-col m-6 space-y-10 shadow-2xl rounded-2xl md:flex-row md:space-y-0 md:m-0">
+    <form>
+      <div class="flex flex-col space-y-4 p-6 md:p-20">
+        <h2 class="mb-5 text-4xl font-bold">
+          ثبت نام
+        </h2>
+        <input type="email" placeholder="Email" class="input input-bordered input-accent w-full md:min-w-[400px]"/>
+        <input type="text" placeholder="First Name" class="input input-bordered input-accent w-full md:min-w-[400px]"/>
+        <input type="text" placeholder="Last Name" class="input input-bordered input-accent w-full md:min-w-[400px]"/>
+        <input type="password" placeholder="password"
+               class="input input-bordered input-accent w-full md:min-w-[400px]"/>
+        <input type="password" placeholder="retype password"
+               class="input input-bordered input-accent w-full md:min-w-[400px]"/>
+        <input type="date" placeholder="Birth Date" class="input input-bordered input-accent w-full md:min-w-[400px]"/>
+        <select class="select select-accent w-full max-w-xs md:min-w-[400px]">
+          <option disabled selected class="hidden">به چه عنوانی وارد میشوید</option>
+          <option>کاربر معمولی</option>
+          <option>خدمات دهنده</option>
+        </select>
+        <div class="flex flex-row justify-start">
+          <button class="btn btn-accent px-6">ارسال</button>
+        </div>
+      </div>
+    </form>
+    <img src="assets/photo-1513343041531-f73bffeed81b.jpeg" alt=""
+         class="w-[430px] hidden md:block object-cover rounded-bl-2xl rounded-tl-2xl">
   </div>
-  <img src="assets/_d5856baa-9a4e-49d6-bcb1-5029b5daa6f0.jpeg" alt="" class="w-[430px] hidden md:block">
 </div>
-
