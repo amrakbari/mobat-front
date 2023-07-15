@@ -1,0 +1,19 @@
+<div class="flex items-center justify-center h-screen">
+  <div class="bg-white relative flex flex-col m-6 space-y-10 shadow-2xl rounded-2xl md:flex-row md:space-y-0 md:m-0">
+    <form #signInForm="ngForm" (ngSubmit)="submit(signInForm)" >
+      <div class="flex flex-col space-y-4 p-6 md:p-20">
+        <h2 class="mb-5 text-4xl font-bold">
+          ورود
+        </h2>
+        <input type="email" ngModel name="email" placeholder="Email" class="input input-bordered input-accent w-full md:min-w-[400px]"/>
+        <input type="password" ngModel name="password" placeholder="password"
+               class="input input-bordered input-accent w-full md:min-w-[400px]"/>
+        <div class="flex flex-row justify-start">
+          <button class="btn btn-accent px-6">ارسال</button>
+        </div>
+      </div>
+    </form>
+    <img src="assets/photo-1513343041531-f73bffeed81b.jpeg" alt=""
+         class="w-[430px] hidden md:block object-cover rounded-bl-2xl rounded-tl-2xl">
+  </div>
+</div>

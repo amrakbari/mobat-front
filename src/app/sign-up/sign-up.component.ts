@@ -10,7 +10,7 @@ import {data} from "autoprefixer";
 })
 export class SignUpComponent {
     constructor(private http: SignUpService) {}
-    userRoles = [•••••••••••
+    userRoles = [
       {id: 'ST', name: 'خدمات دهنده'},
       {id: 'US', name: 'کاربر معمولی'},
     ];
