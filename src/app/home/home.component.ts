@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {HomePageServiceService} from "../home-page-service.service";
+import {data} from "autoprefixer";
 
 @Component({
   selector: 'app-home',
@@ -6,9 +8,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  constructor() {
+  constructor(private http: HomePageServiceService) {
     let stores = [];
-
+    this.http.get_stores().subscribe(data => {
+      stores = data;
+    }, error => {
+      console.log(error);
+      // change
+    })
   }
 
 }
