@@ -11,7 +11,11 @@ export class SignInServiceService {
 
   constructor(private http: HttpClient) { }
 
-  login(body: SignInInterface): Observable<any> {
+    logout() {;
+      localStorage.removeItem("access_token");
+    }
+
+    login(body: SignInInterface): Observable<any> {
     return this.http.post('http://localhost:8001/auth/jwt/create/', body);
   }
 }
