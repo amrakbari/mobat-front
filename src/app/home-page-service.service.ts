@@ -12,6 +12,6 @@ export class HomePageServiceService {
 
   get_stores(): Observable<any> {
     const token = localStorage.getItem('access_token')
-    return this.http.get('http://localhost:8000/store/stores/', {headers: {'Authorization': `JWT ${token}`}})
+    return this.http.get('http://localhost:8001/store/stores/', {headers: {'Authorization': `JWT ${token}`}})
   }
 }

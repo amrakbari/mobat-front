@@ -8,10 +8,12 @@ import {data} from "autoprefixer";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+  stores = [];
+
   constructor(private http: HomePageServiceService) {
-    let stores = [];
+
     this.http.get_stores().subscribe(data => {
-      stores = data;
+      this.stores = data;
     }, error => {
       console.log(error);
       // change
