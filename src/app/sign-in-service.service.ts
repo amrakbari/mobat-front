@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {SignInInterface} from "./sign-in-interface";
 import {Observable} from "rxjs";
 import {data} from "autoprefixer";
+import {enviroment} from "../../environments/environments";
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,6 @@ export class SignInServiceService {
     }
 
     login(body: SignInInterface): Observable<any> {
-    return this.http.post('http://localhost:8001/auth/jwt/create/', body);
+    return this.http.post(`${enviroment.apiurl}/auth/jwt/create/`, body);
   }
 }

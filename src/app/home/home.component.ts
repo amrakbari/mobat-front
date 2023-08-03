@@ -9,6 +9,7 @@ import {data} from "autoprefixer";
 })
 export class HomeComponent {
   stores = [];
+  services = [];
 
   constructor(private http: HomePageServiceService) {
 
@@ -17,6 +18,12 @@ export class HomeComponent {
     }, error => {
       console.log(error);
       // change
+    })
+
+    this.http.get_services().subscribe(data => {
+      this.services = data;
+    }, error => {
+      console.log(error)
     })
   }
 
