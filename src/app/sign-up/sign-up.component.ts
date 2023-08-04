@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {SignUpService} from "../sign-up.service";
 import {SignUpInterface} from "../sign-up-interface";
-import {data} from "autoprefixer";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-sign-up',
@@ -9,7 +9,7 @@ import {data} from "autoprefixer";
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent {
-    constructor(private http: SignUpService) {}
+    constructor(private http: SignUpService, private router: Router) {}
     userRoles = [
       {id: 'ST', name: 'خدمات دهنده'},
       {id: 'US', name: 'کاربر معمولی'},
@@ -26,6 +26,6 @@ export class SignUpComponent {
       }
       let response = this.http.post_user_data(body)
       console.log(body)
-      response.subscribe(value => {console.log('ok')}, error => {console.log(error)})
+      response.subscribe(value => {this.router.navigate(['/sign-in'])}, error => {console.log(error)})
     }
 }

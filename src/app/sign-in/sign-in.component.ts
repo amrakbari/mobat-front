@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {SignInInterface} from "../sign-in-interface";
 import {SignInServiceService} from "../sign-in-service.service";
+import { Router } from "@angular/router";
+
 
 import * as moment from "moment";
 
@@ -10,7 +12,7 @@ import * as moment from "moment";
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent {
-  constructor(private http: SignInServiceService) {
+  constructor(private http: SignInServiceService, private router: Router) {
 
   }
 
@@ -26,7 +28,7 @@ export class SignInComponent {
     this.http.login(body).subscribe(data => {
       if (data && data.access) {
         this.setSession(data);
-         // redirect to home
+        this.router.navigate(['/'])
       }
     }, error => {
       console.log(error)
