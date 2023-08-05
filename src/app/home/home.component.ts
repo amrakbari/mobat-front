@@ -30,4 +30,8 @@ export class HomeComponent {
     })
   }
 
+  redirect_to_home() {
+    this.router.navigate(['']);
+  }
+
 }

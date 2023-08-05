@@ -10,4 +10,8 @@ import { Router } from "@angular/router";
 export class ProfileComponent {
   constructor(private router: Router) {
   }
+
+  redirect_to_home() {
+    this.router.navigate(['']);
+  }
 }
