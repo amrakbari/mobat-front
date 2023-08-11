@@ -12,11 +12,11 @@ export class SignInServiceService {
 
   constructor(private http: HttpClient) { }
 
-    logout() {;
+    logout() {
       localStorage.removeItem("access_token");
     }
 
     login(body: SignInInterface): Observable<any> {
-    return this.http.post(`${enviroment.apiurl}/auth/jwt/create/`, body);
-  }
+      return this.http.post(`${enviroment.apiurl}/auth/jwt/create/`, body);
+    }
 }
