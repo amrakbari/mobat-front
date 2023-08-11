@@ -1,22 +1,21 @@
 <div class="flex items-center justify-center h-screen">
   <div class="bg-white relative flex flex-col m-6 space-y-10 shadow-2xl rounded-2xl md:flex-row md:space-y-0 md:m-0">
-    <form>
+    <form #signUpForm="ngForm" (ngSubmit)="submit(signUpForm)" >
       <div class="flex flex-col space-y-4 p-6 md:p-20">
         <h2 class="mb-5 text-4xl font-bold">
           ثبت نام
         </h2>
-        <input type="email" placeholder="Email" class="input input-bordered input-accent w-full md:min-w-[400px]"/>
-        <input type="text" placeholder="First Name" class="input input-bordered input-accent w-full md:min-w-[400px]"/>
-        <input type="text" placeholder="Last Name" class="input input-bordered input-accent w-full md:min-w-[400px]"/>
-        <input type="password" placeholder="password"
+        <input type="email" ngModel name="email" placeholder="Email" class="input input-bordered input-accent w-full md:min-w-[400px]"/>
+        <input type="text" ngModel name="firstName" placeholder="First Name" class="input input-bordered input-accent w-full md:min-w-[400px]"/>
+        <input type="text" ngModel name="lastName" placeholder="Last Name" class="input input-bordered input-accent w-full md:min-w-[400px]"/>
+        <input type="password" ngModel name="password" placeholder="password"
                class="input input-bordered input-accent w-full md:min-w-[400px]"/>
-        <input type="password" placeholder="retype password"
+        <input type="password" ngModel name="rePassword" placeholder="retype password"
                class="input input-bordered input-accent w-full md:min-w-[400px]"/>
-        <input type="date" placeholder="Birth Date" class="input input-bordered input-accent w-full md:min-w-[400px]"/>
-        <select class="select select-accent w-full max-w-xs md:min-w-[400px]">
-          <option disabled selected class="hidden">به چه عنوانی وارد میشوید</option>
-          <option>کاربر معمولی</option>
-          <option>خدمات دهنده</option>
+        <input type="date" ngModel name="birthDate" placeholder="Birth Date" class="input input-bordered input-accent w-full md:min-w-[400px]"/>
+        <select ngModel name="role" class="select select-accent w-full max-w-xs md:min-w-[400px]">
+          <option disabled selected class="hidden" value="">به چه عنوانی وارد میشوید</option>
+          <option *ngFor="let role of userRoles" [value]="role.id">{{role.name}}</option>
         </select>
         <div class="flex flex-row justify-start">
           <button class="btn btn-accent px-6">ارسال</button>

@@ -1,14 +1,19 @@
 <div class="drawer">
-  <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
+  <input id="my-drawer-3" type="checkbox" class="drawer-toggle"/>
   <div class="drawer-content flex flex-col">
     <!-- Navbar -->
     <div class="navbar bg-base-300 bg-primary">
       <div class="flex-none lg:hidden">
         <label for="my-drawer-3" class="btn btn-square btn-ghost">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+               class="inline-block w-6 h-6 stroke-current">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
         </label>
       </div>
-      <div class="text-2xl flex-1 px-2 mx-2">موبت</div>
+      <div class="text-2xl flex-1 px-2 mx-2" >
+        <button (click)="redirect_to_home()">موبت</button>
+      </div>
       <div class="flex-none lg:block">
         <ul class="menu menu-horizontal">
           <!-- Navbar menu content here -->
@@ -23,112 +28,37 @@
               </ul>
             </details>
           </li>
-          <li><a>پروفایل</a></li>
+          <li><a href="./profile">پروفایل</a></li>
         </ul>
       </div>
     </div>
     <!-- Page content here -->
     <div class="grid grid-cols-8">
       <ul class="menu menu-lg bg-base-200 w-full rounded-box mt-5 mr-3 hidden lg:block col-span-1">
-        <li><a>مانیکور</a></li>
-        <li><a>پدیکور</a></li>
-        <li><a>کوتاهی مو</a></li>
-        <li><a>اکستنشن</a></li>
-        <li><a>پلاتین</a></li>
-        <li><a>ژلیش</a></li>
-        <li><a>کراتین</a></li>
-        <li><a>کراتین</a></li>
-        <li><a>کراتین</a></li>
-        <li><a>کراتین</a></li>
-        <li><a>کراتین</a></li>
-        <li><a>کراتین</a></li>
-        <li><a>کراتین</a></li>
-        <li><a>کراتین</a></li>
-        <li><a>کراتین</a></li>
-        <li><a>کراتین</a></li>
-        <li><a>کراتین</a></li>
-        <li><a>کراتین</a></li>
-        <li><a>کراتین</a></li>
-        <li><a>کراتین</a></li>
-        <li><a>کراتین</a></li>
+        <li *ngFor="let service of services"><a>{{ service['title'] }}</a></li>
       </ul>
       <div class="flex flex-wrap content-start justify-center space-y-10 space-x-10 col-span-8 lg:col-span-7">
         <span></span>
-        <div class="card bg-base-100 shadow-xl hover:shadow-indigo-500/30 image-full h-[250px] w-[400px]">
-          <figure><img src="assets/Hair_Salon_Stations.jpg" class="object-cover w-full" alt="Shoes" /></figure>
+        <div *ngFor="let store of stores"
+             class="card bg-base-100 shadow-xl hover:shadow-indigo-500/30 image-full h-[250px] w-[400px]">
+          <figure><img src="assets/Hair_Salon_Stations.jpg" class="object-cover w-full" alt="Shoes"/></figure>
           <div class="card-body">
-            <h2 class="card-title">زیباکده</h2>
+            <h2 class="card-title">{{store['title']}}</h2>
             <p>به خودت برس</p>
             <div class="card-actions justify-end">
               <button class="btn btn-primary">نوبت دهی</button>
             </div>
           </div>
         </div>
-        <div class="card bg-base-100 shadow-xl hover:shadow-indigo-500/30 image-full h-[250px] w-[400px]">
-          <figure><img src="assets/Hair_Salon_Stations.jpg" class="object-cover w-full" alt="Shoes" /></figure>
-          <div class="card-body">
-            <h2 class="card-title">زیباکده</h2>
-            <p>به خودت برس</p>
-            <div class="card-actions justify-end">
-              <button class="btn btn-primary">نوبت دهی</button>
-            </div>
-          </div>
-        </div>
-        <div class="card bg-base-100 shadow-xl hover:shadow-indigo-500/30 image-full h-[250px] w-[400px]">
-          <figure><img src="assets/Hair_Salon_Stations.jpg" class="object-cover w-full" alt="Shoes" /></figure>
-          <div class="card-body">
-            <h2 class="card-title">زیباکده</h2>
-            <p>به خودت برس</p>
-            <div class="card-actions justify-end">
-              <button class="btn btn-primary">نوبت دهی</button>
-            </div>
-          </div>
-        </div>
-        <div class="card bg-base-100 shadow-xl hover:shadow-indigo-500/30 image-full h-[250px] w-[400px]">
-          <figure><img src="assets/Hair_Salon_Stations.jpg" class="object-cover w-full" alt="Shoes" /></figure>
-          <div class="card-body">
-            <h2 class="card-title">زیباکده</h2>
-            <p>به خودت برس</p>
-            <div class="card-actions justify-end">
-              <button class="btn btn-primary">نوبت دهی</button>
-            </div>
-          </div>
-        </div>
-        <div class="card bg-base-100 shadow-xl hover:shadow-indigo-500/30 image-full h-[250px] w-[400px]">
-          <figure><img src="assets/Hair_Salon_Stations.jpg" class="object-cover w-full" alt="Shoes" /></figure>
-          <div class="card-body">
-            <h2 class="card-title">زیباکده</h2>
-            <p>به خودت برس</p>
-            <div class="card-actions justify-end">
-              <button class="btn btn-primary">نوبت دهی</button>
-            </div>
-          </div>
-        </div>
-      </div>
 
+      </div>
     </div>
   </div>
   <div class="drawer-side z-20">
     <label for="my-drawer-3" class="drawer-overlay"></label>
     <ul class="menu p-4 w-80 h-full bg-base-200">
       <!-- Sidebar content here -->
-      <li><a>مانیکور</a></li>
-      <li><a>پدیکور</a></li>
-      <li><a>کوتاهی مو</a></li>
-      <li><a>اکستنشن</a></li>
-      <li><a>پلاتین</a></li>
-      <li><a>ژلیش</a></li>
-      <li><a>کراتین</a></li>
-      <li><a>کراتین</a></li>
-      <li><a>کراتین</a></li>
-      <li><a>کراتین</a></li>
-      <li><a>کراتین</a></li>
-      <li><a>کراتین</a></li>
-      <li><a>کراتین</a></li>
-      <li><a>کراتین</a></li>
-      <li><a>کراتین</a></li>
-
+      <li *ngFor="let service of services"><a>{{ service['title'] }}</a></li>
     </ul>
-
   </div>
 </div>

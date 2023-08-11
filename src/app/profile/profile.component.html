@@ -1,0 +1,81 @@
+<div class="flex flex-col">
+  <div class="mb-4 navbar bg-base-300 bg-primary">
+    <div class="text-2xl flex-1 px-2 mx-2" >
+      <button (click)="redirect_to_home()">موبت</button>
+    </div>
+    <div class="flex-none lg:block">
+      <ul class="menu menu-horizontal">
+        <li><a>پروفایل</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="mb-4 flex flex-col w-4/5 mx-auto bg-base-300 shadow-md p-6 rounded-lg">
+    <div class="text-lg text-white font-semibold mb-2 text-gray-900">اطلاعات کاربر</div>
+    <div class="flex flex-row justify-center">
+      <div class="mx-4 flex flex-row">
+        <label class="block text-white font-medium ml-2">نام:</label>
+        <p class="text-white">امیررضا</p>
+      </div>
+      <div class="flex flex-row mx-4">
+        <label class="block text-white font-medium ml-2">نام خانوادگی:</label>
+        <p class="text-white">اکبری</p>
+      </div>
+      <div class="flex flex-row mx-4">
+        <label class="block text-white font-medium ml-2">ایمیل:</label>
+        <p class="text-white">amrakbaridev@gmail.com</p>
+      </div>
+    </div>
+  </div>
+  <div class="mb-4 flex flex-col w-4/5 mx-auto bg-base-300 shadow-md p-6 rounded-lg">
+    <div class="text-lg font-semibold mb-2 text-white">آدرس های من</div>
+    <div class="overflow-x-auto pb-4">
+      <table class="table">
+        <!-- head -->
+        <thead>
+        <tr>
+          <th class="text-right"></th>
+          <th class="text-right">عنوان</th>
+          <th class="text-right">جزئیات</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- row 1 -->
+        <tr>
+          <th class="text-right">1</th>
+          <td class="text-right">خانه خودم</td>
+          <td class="text-right">خیابان سی متری نیروهوایی - خیابان بصیر - خیابان افضلی - کوچه ۱۳/۳۴ - پلاک ۲۵ واحد </td>
+        </tr>
+        <!-- row 2 -->
+        <tr>
+          <th class="text-right">2</th>
+          <td class="text-right">خانه مادرم</td>
+          <td class="text-right">خیابان سی متری نیروهوایی - خیابان بصیر - خیابان افضلی - کوچه ۱۳/۳۴ - پلاک ۲۵ واحد </td>
+        </tr>
+        <!-- row 3 -->
+        <tr>
+          <th class="text-right">3</th>
+          <td class="text-right">شرکت</td>
+          <td class="text-right">خیابان سی متری نیروهوایی - خیابان بصیر - خیابان افضلی - کوچه ۱۳/۳۴ - پلاک ۲۵ واحد ۲</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <button class="btn w-max btn-accent" onclick="my_modal_3.showModal()">افزودن آدرس</button>
+    <dialog id="my_modal_3" class="modal">
+      <form method="dialog" class="modal-box">
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+        <div class="flex flex-col space-y-4 md:p-20">
+          <input type="text" ngModel name="email" placeholder="عنوان" class="input input-bordered input-accent w-full"/>
+          <input type="text" ngModel name="firstName" placeholder="جزئیات" class="input input-bordered input-accent w-full"/>
+          <select ngModel name="role" class="select select-accent w-full max-w-xs">
+            <option disabled selected class="hidden" value="">محله</option>
+            <option disabled selected class="hidden" value="">نیروهوای</option>
+          </select>
+          <div class="flex flex-row justify-start">
+            <button class="btn btn-accent px-6">ارسال</button>
+          </div>
+        </div>
+      </form>
+    </dialog>
+  </div>
+</div>
