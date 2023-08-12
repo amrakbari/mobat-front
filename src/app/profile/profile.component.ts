@@ -7,6 +7,9 @@ import {AddressInterface} from "../address-interface";
 import {ServiceInterface} from "../service-interface";
 import {error} from "@angular/compiler-cli/src/transformers/util";
 import {StoreInterface} from "../store-interface";
+import {SignUpInterface} from "../sign-up-interface";
+import {AddressInInterface} from "../address-in-interface";
+import {NeighbourhoodInterface} from "../neighbourhood-interface";
 
 @Component({
   selector: 'app-profile',
@@ -24,10 +27,13 @@ export class ProfileComponent {
   userAddresses: AddressInterface[] = []
   services: ServiceInterface[] = []
   stores: StoreInterface[] = []
+  neighbourhoods: NeighbourhoodInterface[] = []
 
   getAddressById(id: number): AddressInterface | undefined {
     return this.userAddresses.find(o => o.id === id);
   }
+
+
 
   setUserData() {
     this.http.getUserProfile().subscribe(data => {
@@ -58,6 +64,16 @@ export class ProfileComponent {
     })
   }
 
+  setNeighbourhoods() {
+    this.http.getNeighbourhoods().subscribe(neighbourhoods => {
+      this.neighbourhoods = neighbourhoods;
+    }, error => {
+      if (error.status == '401') {
+        this.router.navigate(['/sign-in']);
+      }
+    })
+  }
+
 
   setUserAddresses() {
     this.http.getUserAddresses().subscribe(addresses => {
@@ -79,21 +95,33 @@ export class ProfileComponent {
     })
   }
 
-  addAppointment() {
-    this.http.addAddress().subscribe(data => {
-      // add returned data to Adresses
-    }, error => {
-      if (error.status == 401) {
-        this.router.navigate(['/sign-in']);
-      }
-    })
-  }
+  // addAppointment() {
+  //   this.http.addAddress().subscribe(data => {
+  //     // add returned data to Adresses
+  //   }, error => {
+  //     if (error.status == 401) {
+  //       this.router.navigate(['/sign-in']);
+  //     }
+  //   })
+  // }
 
   constructor(private router: Router, private http: ProfileService) {
     this.setUserData();
     this.setUserAddresses();
     this.setServices();
     this.setStores();
+    this.setNeighbourhoods();
+  }
+
+  addressSubmit(addressForm: any) {
+    let body: AddressInInterface = {
+      title: addressForm.value.title,
+      neighbourhood: addressForm.value.neighbourhood,
+      description: addressForm.value.description,
+    }
+    let response = this.http.addAddress(body).subscribe(address => {
+      this.userAddresses.push(address)
+    })
   }
 
   redirect_to_home() {

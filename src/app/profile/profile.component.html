@@ -50,18 +50,14 @@
     </div>
     <button class="btn w-max btn-accent" onclick="my_modal_3.showModal()">افزودن آدرس</button>
     <dialog id="my_modal_3" class="modal">
-      <form method="dialog" class="modal-box">
+      <form #addAddressForm="ngForm" (ngSubmit)="addressSubmit(addAddressForm)" method="dialog" class="modal-box">
         <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
         <div class="flex flex-col space-y-4 md:p-20">
-          <input type="text" ngModel name="email" placeholder="عنوان" class="input input-bordered input-accent w-full"/>
-          <input type="" ngModel name="firstName" placeholder="جزئیات" class="input input-bordered input-accent w-full"/>
-          <select ngModel name="neighborhood" class="select select-accent w-full">
+          <input type="text" ngModel name="title" placeholder="عنوان" class="input input-bordered input-accent w-full"/>
+          <input type="" ngModel name="description" placeholder="جزئیات" class="input input-bordered input-accent w-full"/>
+          <select ngModel name="neighbourhood" class="select select-accent w-full">
             <option disabled selected class="hidden" value="">محله</option>
-            <option value="">نیروهوای</option>
-            <option value="">تهران پارس</option>
-            <option value="">تهران نو</option>
-            <option value="">افسریه</option>
-            <option value="">پونک</option>
+            <option *ngFor="let neighbourhood of neighbourhoods" value="{{ neighbourhood.id }}">{{ neighbourhood.title }}</option>
           </select>
           <div class="flex flex-row justify-start">
             <button class="btn btn-accent px-6">ارسال</button>

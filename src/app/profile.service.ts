@@ -4,6 +4,7 @@ import {enviroment} from "../../environments/environments";
 import {Observable} from "rxjs";
 import {UserDataInterface} from "./user-data-interface";
 import {error} from "@angular/compiler-cli/src/transformers/util";
+import {AddressInInterface} from "./address-in-interface";
 
 
 @Injectable({
@@ -31,10 +32,9 @@ export class ProfileService {
     return this.http.get(`${enviroment.apiurl}/accounts/addresses/`, {headers: {'Authorization': `JWT ${token}`}});
   }
 
-  addAddress(): Observable<any> {
-    let finalData: UserDataInterface;
+  addAddress(body: AddressInInterface): Observable<any> {
     const token = localStorage.getItem('access_token');
-    return this.http.post(`${enviroment.apiurl}/account`, {headers: {'Authorization': `JWT ${token}`}});
+    return this.http.post(`${enviroment.apiurl}/accounts/addresses/`, body, {headers: {'Authorization': `JWT ${token}`}});
   }
 
   getServices(): Observable<any> {
@@ -45,6 +45,11 @@ export class ProfileService {
   getCurrentUserStores(): Observable<any> {
     const token = localStorage.getItem('access_token')
     return this.http.get(`${enviroment.apiurl}/store/stores/current-user-stores/`, {headers: {'Authorization': `JWT ${token}`}})
+  }
+
+  getNeighbourhoods(): Observable<any> {
+    const token = localStorage.getItem('access_token')
+    return this.http.get(`${enviroment.apiurl}/accounts/neighbourhoods/`, {headers: {'Authorization': `JWT ${token}`}})
   }
 
 }
