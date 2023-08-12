@@ -37,4 +37,9 @@ export class ProfileService {
     return this.http.post(`${enviroment.apiurl}/account`, {headers: {'Authorization': `JWT ${token}`}});
   }
 
+  getServices(): Observable<any> {
+    const token = localStorage.getItem('access_token')
+    return this.http.get(`${enviroment.apiurl}/store/services/`, {headers: {'Authorization': `JWT ${token}`}})
+  }
+
 }

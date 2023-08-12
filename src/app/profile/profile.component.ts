@@ -4,6 +4,8 @@ import {ProfileService} from "../profile.service";
 import {UserDataInterface} from "../user-data-interface";
 import {data} from "autoprefixer";
 import {AddressInterface} from "../address-interface";
+import {ServiceInterface} from "../service-interface";
+import {error} from "@angular/compiler-cli/src/transformers/util";
 
 @Component({
   selector: 'app-profile',
@@ -19,6 +21,7 @@ export class ProfileComponent {
   };
 
   userAddresses: AddressInterface[] = []
+  services: ServiceInterface[] = []
 
 
   setUserData() {
@@ -40,9 +43,21 @@ export class ProfileComponent {
     })
   }
 
+
+
   setUserAddresses() {
     this.http.getUserAddresses().subscribe(addresses => {
       this.userAddresses = addresses;
+    }, error => {
+      if (error.status == 401) {
+        this.router.navigate(['/sign-in']);
+      }
+    })
+  }
+
+  setServices() {
+    this.http.getServices().subscribe(services => {
+      this.services = services;
     }, error => {
       if (error.status == 401) {
         this.router.navigate(['/sign-in']);
@@ -63,6 +78,7 @@ export class ProfileComponent {
   constructor(private router: Router, private http: ProfileService) {
     this.setUserData()
     this.setUserAddresses()
+    this.setServices()
   }
 
   redirect_to_home() {
