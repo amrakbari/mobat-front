@@ -14,15 +14,15 @@
     <div class="flex flex-col justify-center">
       <div class="mx-4 my-1 flex flex-row">
         <label class="block text-white font-medium ml-2">نام:</label>
-        <p class="text-white">امیررضا</p>
+        <p class="text-white">{{userData.first_name}}</p>
       </div>
       <div class="flex my-1 flex-row mx-4">
         <label class="block text-white font-medium ml-2">نام خانوادگی:</label>
-        <p class="text-white">اکبری</p>
+        <p class="text-white">{{userData.last_name}}</p>
       </div>
       <div class="flex my-1 flex-row mx-4">
         <label class="block text-white font-medium ml-2">ایمیل:</label>
-        <p class="text-white">amrakbaridev@gmail.com</p>
+        <p class="text-white">{{userData.email}}</p>
       </div>
     </div>
   </div>
@@ -40,22 +40,10 @@
         </thead>
         <tbody>
         <!-- row 1 -->
-        <tr>
-          <th class="text-right">1</th>
-          <td class="text-right">خانه خودم</td>
-          <td class="text-right">خیابان سی متری نیروهوایی - خیابان بصیر - خیابان افضلی - کوچه ۱۳/۳۴ - پلاک ۲۵ واحد </td>
-        </tr>
-        <!-- row 2 -->
-        <tr>
-          <th class="text-right">2</th>
-          <td class="text-right">خانه مادرم</td>
-          <td class="text-right">خیابان سی متری نیروهوایی - خیابان بصیر - خیابان افضلی - کوچه ۱۳/۳۴ - پلاک ۲۵ واحد </td>
-        </tr>
-        <!-- row 3 -->
-        <tr>
-          <th class="text-right">3</th>
-          <td class="text-right">شرکت</td>
-          <td class="text-right">خیابان سی متری نیروهوایی - خیابان بصیر - خیابان افضلی - کوچه ۱۳/۳۴ - پلاک ۲۵ واحد ۲</td>
+        <tr *ngFor="let address of userAddresses; let i = index">
+          <th class="text-right">{{i + 1}}</th>
+          <td class="text-right">{{ address.title }}</td>
+          <td class="text-right">{{ address.description }}</td>
         </tr>
         </tbody>
       </table>
@@ -82,7 +70,7 @@
       </form>
     </dialog>
   </div>
-  <div class="mb-4 flex flex-col w-4/5 mx-auto bg-base-300 shadow-md p-6 rounded-lg">
+  <div *ngIf="userData?.role === 'ST'" class="mb-4 flex flex-col w-4/5 mx-auto bg-base-300 shadow-md p-6 rounded-lg">
     <div class="text-lg font-semibold mb-2 text-white">آرایشگاه های من</div>
     <div class="overflow-x-auto pb-4">
       <table class="table">
