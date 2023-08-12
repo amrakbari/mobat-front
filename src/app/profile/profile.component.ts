@@ -10,6 +10,7 @@ import {StoreInterface} from "../store-interface";
 import {SignUpInterface} from "../sign-up-interface";
 import {AddressInInterface} from "../address-in-interface";
 import {NeighbourhoodInterface} from "../neighbourhood-interface";
+import {StoreInInterface} from "../store-in-interface";
 
 @Component({
   selector: 'app-profile',
@@ -95,15 +96,15 @@ export class ProfileComponent {
     })
   }
 
-  // addAppointment() {
-  //   this.http.addAddress().subscribe(data => {
-  //     // add returned data to Adresses
-  //   }, error => {
-  //     if (error.status == 401) {
-  //       this.router.navigate(['/sign-in']);
-  //     }
-  //   })
-  // }
+  storeSubmit(addressForm: any) {
+    let body: StoreInInterface = {
+      title: addressForm.value.title,
+      address: addressForm.value.address,
+    }
+    this.http.addStore(body).subscribe(address => {
+      this.stores.push(address)
+    })
+  }
 
   constructor(private router: Router, private http: ProfileService) {
     this.setUserData();
@@ -119,7 +120,7 @@ export class ProfileComponent {
       neighbourhood: addressForm.value.neighbourhood,
       description: addressForm.value.description,
     }
-    let response = this.http.addAddress(body).subscribe(address => {
+    this.http.addAddress(body).subscribe(address => {
       this.userAddresses.push(address)
     })
   }

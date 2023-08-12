@@ -90,14 +90,13 @@
     </div>
     <button class="btn w-max btn-accent" onclick="my_modal_4.showModal()">افزودن آرایشگاه</button>
     <dialog id="my_modal_4" class="modal">
-      <form method="dialog" class="modal-box">
+      <form #addStoreForm="ngForm" (ngSubmit)="storeSubmit(addStoreForm)" method="dialog" class="modal-box">
         <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
         <div class="flex flex-col space-y-4 md:p-20">
-          <input type="text" ngModel name="email" placeholder="عنوان" class="input input-bordered input-accent w-full"/>
+          <input type="text" ngModel name="title" placeholder="عنوان" class="input input-bordered input-accent w-full"/>
           <select ngModel name="address" class="select select-accent w-full max-w-xs">
             <option disabled selected class="hidden" value="">آدرس</option>
-            <option value="">خانه خودم</option>
-            <option value="">شرکت</option>
+            <option *ngFor="let address of userAddresses" value="{{ address.id }}">{{ address.title }}</option>
           </select>
           <div class="flex flex-row justify-start">
             <button class="btn btn-accent px-6">ارسال</button>
@@ -112,8 +111,7 @@
         <div class="flex flex-col space-y-4 md:p-20">
           <select ngModel name="store" class="select select-accent w-full max-w-xs">
             <option disabled selected class="hidden" value="">خدمات مورد نظر</option>
-            <option value="">مانیکور</option>
-            <option value="">پدیکور</option>
+            <option *ngFor="let service of services" value="{{ service.id }}">{{ service.title }}</option>
           </select>
           <input type="date" ngModel name="birthDate" placeholder="روز" class="input input-bordered input-accent w-full max-w-xs"/>
           <input type="time" ngModel name="birthDate" placeholder="زمان شروع" class="input input-bordered input-accent w-full max-w-xs"/>

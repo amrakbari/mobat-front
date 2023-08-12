@@ -5,6 +5,7 @@ import {Observable} from "rxjs";
 import {UserDataInterface} from "./user-data-interface";
 import {error} from "@angular/compiler-cli/src/transformers/util";
 import {AddressInInterface} from "./address-in-interface";
+import {StoreInInterface} from "./store-in-interface";
 
 
 @Injectable({
@@ -35,6 +36,11 @@ export class ProfileService {
   addAddress(body: AddressInInterface): Observable<any> {
     const token = localStorage.getItem('access_token');
     return this.http.post(`${enviroment.apiurl}/accounts/addresses/`, body, {headers: {'Authorization': `JWT ${token}`}});
+  }
+
+  addStore(body: StoreInInterface): Observable<any> {
+    const token = localStorage.getItem('access_token');
+    return this.http.post(`${enviroment.apiurl}/store/stores/`, body, {headers: {'Authorization': `JWT ${token}`}});
   }
 
   getServices(): Observable<any> {
