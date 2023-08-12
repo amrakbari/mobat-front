@@ -31,4 +31,10 @@ export class ProfileService {
     return this.http.get(`${enviroment.apiurl}/accounts/addresses/`, {headers: {'Authorization': `JWT ${token}`}});
   }
 
+  addAddress(): Observable<any> {
+    let finalData: UserDataInterface;
+    const token = localStorage.getItem('access_token');
+    return this.http.post(`${enviroment.apiurl}/account`, {headers: {'Authorization': `JWT ${token}`}});
+  }
+
 }

@@ -1,0 +1,73 @@
+<div class="flex flex-col">
+  <div class="mb-4 navbar bg-base-300 bg-primary">
+    <div class="text-2xl flex-1 px-2 mx-2" >
+      <button (click)="redirect_to_home()">موبت</button>
+    </div>
+    <div class="flex-none lg:block">
+      <ul class="menu menu-horizontal">
+        <li><a>پروفایل</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="mb-4 flex flex-col w-4/5 mx-auto bg-base-300 shadow-md p-6 rounded-lg">
+    <div class="text-lg text-white font-semibold mb-2 text-gray-900">اطلاعات فروشگاه</div>
+    <div class="flex flex-col justify-center">
+      <div class="mx-4 my-1 flex flex-row">
+        <label class="block text-white font-medium ml-2">نام:</label>
+        <p class="text-white">test</p>
+      </div>
+      <div class="flex my-1 flex-row mx-4">
+        <label class="block text-white font-medium ml-2">آدرس:</label>
+        <p class="text-white">test</p>
+      </div>
+    </div>
+  </div>
+  <div class="mb-4 flex flex-col w-4/5 mx-auto bg-base-300 shadow-md p-6 rounded-lg">
+    <div class="text-lg font-semibold mb-2 text-white">نوبت ها</div>
+    <div class="overflow-x-auto pb-4">
+      <table class="table">
+        <!-- head -->
+        <thead>
+        <tr>
+          <th class="text-right"></th>
+          <th class="text-right">تاریخ</th>
+          <th class="text-right">از ساعت</th>
+          <th class="text-right">تا ساعت</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- row 1 -->
+        <tr class="hover" onclick="my_modal_5.showModal()">
+          <th class="text-right">1</th>
+          <td class="text-right">۱۴۰۲/۰۵/۲۲</td>
+          <td class="text-right">۱۵:۳۰</td>
+          <td class="text-right">۱۷:۳۰</td>
+        </tr>
+        <!-- row 2 -->
+        <tr class="hover" onclick="my_modal_5.showModal()">
+          <th class="text-right">1</th>
+          <td class="text-right">۱۴۰۲/۰۵/۲۲</td>
+          <td class="text-right">۱۵:۳۰</td>
+          <td class="text-right">۱۷:۳۰</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <dialog id="my_modal_5" class="modal">
+      <form method="dialog" class="modal-box">
+        <h4 class="font-bold text-lg mt-5">افزودن نوبت</h4>
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+        <div class="flex flex-col space-y-4 md:p-20">
+          <select ngModel name="store" class="select select-accent w-full max-w-xs">
+            <option disabled selected class="hidden" value="">خدمات مورد نظر</option>
+            <option value="">مانیکور</option>
+            <option value="">پدیکور</option>
+          </select>
+          <div class="flex flex-row justify-start">
+            <button class="btn btn-accent px-6">ارسال</button>
+          </div>
+        </div>
+      </form>
+    </dialog>
+  </div>
+</div>

@@ -9,6 +9,7 @@ import {FormsModule} from "@angular/forms";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import { SignInComponent } from './sign-in/sign-in.component';
 import { ProfileComponent } from './profile/profile.component';
+import { DetailComponent } from './detail/detail.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { ProfileComponent } from './profile/profile.component';
     HomeComponent,
     SignInComponent,
     ProfileComponent,
+    DetailComponent,
   ],
     imports: [
       BrowserModule,

@@ -50,6 +50,12 @@ export class ProfileComponent {
     })
   }
 
+  addAppointment() {
+    this.http.addAddress().subscribe(data => {
+      // add returned data to Adresses
+    })
+  }
+
   constructor(private router: Router, private http: ProfileService) {
     this.setUserData()
     this.setUserAddresses()
