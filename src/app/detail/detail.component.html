@@ -5,20 +5,20 @@
     </div>
     <div class="flex-none lg:block">
       <ul class="menu menu-horizontal">
-        <li><a>پروفایل</a></li>
+        <li><a href="./profile">پروفایل</a></li>
       </ul>
     </div>
   </div>
   <div class="mb-4 flex flex-col w-4/5 mx-auto bg-base-300 shadow-md p-6 rounded-lg">
-    <div class="text-lg text-white font-semibold mb-2 text-gray-900">اطلاعات فروشگاه</div>
+    <div class="text-lg text-white font-semibold mb-2 text-gray-900">اطلاعات آرایشگاه</div>
     <div class="flex flex-col justify-center">
       <div class="mx-4 my-1 flex flex-row">
         <label class="block text-white font-medium ml-2">نام:</label>
-        <p class="text-white">test</p>
+        <p class="text-white">{{ store.title }}</p>
       </div>
       <div class="flex my-1 flex-row mx-4">
         <label class="block text-white font-medium ml-2">آدرس:</label>
-        <p class="text-white">test</p>
+        <p class="text-white"> {{ address.description }}</p>
       </div>
     </div>
   </div>

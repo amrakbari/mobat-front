@@ -6,6 +6,7 @@ import {data} from "autoprefixer";
 import {AddressInterface} from "../address-interface";
 import {ServiceInterface} from "../service-interface";
 import {error} from "@angular/compiler-cli/src/transformers/util";
+import {StoreInterface} from "../store-interface";
 
 @Component({
   selector: 'app-profile',
@@ -22,7 +23,11 @@ export class ProfileComponent {
 
   userAddresses: AddressInterface[] = []
   services: ServiceInterface[] = []
+  stores: StoreInterface[] = []
 
+  getAddressById(id: number): AddressInterface | undefined {
+    return this.userAddresses.find(o => o.id === id);
+  }
 
   setUserData() {
     this.http.getUserProfile().subscribe(data => {
@@ -43,6 +48,15 @@ export class ProfileComponent {
     })
   }
 
+  setStores() {
+    this.http.getCurrentUserStores().subscribe(stores => {
+      this.stores = stores;
+    }, error => {
+      if (error.status == '401') {
+        this.router.navigate(['/sign-in']);
+      }
+    })
+  }
 
 
   setUserAddresses() {
@@ -76,9 +90,10 @@ export class ProfileComponent {
   }
 
   constructor(private router: Router, private http: ProfileService) {
-    this.setUserData()
-    this.setUserAddresses()
-    this.setServices()
+    this.setUserData();
+    this.setUserAddresses();
+    this.setServices();
+    this.setStores();
   }
 
   redirect_to_home() {

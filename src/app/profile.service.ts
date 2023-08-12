@@ -42,4 +42,9 @@ export class ProfileService {
     return this.http.get(`${enviroment.apiurl}/store/services/`, {headers: {'Authorization': `JWT ${token}`}})
   }
 
+  getCurrentUserStores(): Observable<any> {
+    const token = localStorage.getItem('access_token')
+    return this.http.get(`${enviroment.apiurl}/store/stores/current-user-stores/`, {headers: {'Authorization': `JWT ${token}`}})
+  }
+
 }

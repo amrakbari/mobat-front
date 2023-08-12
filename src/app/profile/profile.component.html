@@ -84,16 +84,10 @@
         </thead>
         <tbody>
         <!-- row 1 -->
-        <tr class="hover" onclick="my_modal_5.showModal()">
-          <th class="text-right">1</th>
-          <td class="text-right">آرایشگاه رخ ۱</td>
-          <td class="text-right">خیابان سی متری نیروهوایی - خیابان بصیر - خیابان افضلی - کوچه ۱۳/۳۴ - پلاک ۲۵ واحد </td>
-        </tr>
-        <!-- row 2 -->
-        <tr class="hover" onclick="my_modal_5.showModal()">
-          <th class="text-right">2</th>
-          <td class="text-right">آرایشگاه رخ ۲</td>
-          <td class="text-right">خیابان سی متری نیروهوایی - خیابان بصیر - خیابان افضلی - کوچه ۱۳/۳۴ - پلاک ۲۵ واحد </td>
+        <tr *ngFor="let store of stores; let i = index" class="hover" onclick="my_modal_5.showModal()">
+          <th class="text-right">{{ i + 1 }}</th>
+          <td class="text-right"> <a href="./store/{{ store.id }}">{{ store.title }}</a></td>
+          <td class="text-right"> {{ getAddressById(store.address)?.description }} </td>
         </tr>
         </tbody>
       </table>
