@@ -4,6 +4,8 @@ import {enviroment} from "../../environments/environments";
 import {Observable} from "rxjs";
 import {UserDataInterface} from "./user-data-interface";
 import {error} from "@angular/compiler-cli/src/transformers/util";
+import {AddressInInterface} from "./address-in-interface";
+import {StoreInInterface} from "./store-in-interface";
 
 
 @Injectable({
@@ -29,6 +31,31 @@ export class ProfileService {
     let finalData: UserDataInterface;
     const token = localStorage.getItem('access_token');
     return this.http.get(`${enviroment.apiurl}/accounts/addresses/`, {headers: {'Authorization': `JWT ${token}`}});
+  }
+
+  addAddress(body: AddressInInterface): Observable<any> {
+    const token = localStorage.getItem('access_token');
+    return this.http.post(`${enviroment.apiurl}/accounts/addresses/`, body, {headers: {'Authorization': `JWT ${token}`}});
+  }
+
+  addStore(body: StoreInInterface): Observable<any> {
+    const token = localStorage.getItem('access_token');
+    return this.http.post(`${enviroment.apiurl}/store/stores/`, body, {headers: {'Authorization': `JWT ${token}`}});
+  }
+
+  getServices(): Observable<any> {
+    const token = localStorage.getItem('access_token')
+    return this.http.get(`${enviroment.apiurl}/store/services/`, {headers: {'Authorization': `JWT ${token}`}})
+  }
+
+  getCurrentUserStores(): Observable<any> {
+    const token = localStorage.getItem('access_token')
+    return this.http.get(`${enviroment.apiurl}/store/stores/current-user-stores/`, {headers: {'Authorization': `JWT ${token}`}})
+  }
+
+  getNeighbourhoods(): Observable<any> {
+    const token = localStorage.getItem('access_token')
+    return this.http.get(`${enviroment.apiurl}/accounts/neighbourhoods/`, {headers: {'Authorization': `JWT ${token}`}})
   }
 
 }

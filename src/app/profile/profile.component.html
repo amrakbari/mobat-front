@@ -50,18 +50,14 @@
     </div>
     <button class="btn w-max btn-accent" onclick="my_modal_3.showModal()">افزودن آدرس</button>
     <dialog id="my_modal_3" class="modal">
-      <form method="dialog" class="modal-box">
+      <form #addAddressForm="ngForm" (ngSubmit)="addressSubmit(addAddressForm)" method="dialog" class="modal-box">
         <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
         <div class="flex flex-col space-y-4 md:p-20">
-          <input type="text" ngModel name="email" placeholder="عنوان" class="input input-bordered input-accent w-full"/>
-          <input type="" ngModel name="firstName" placeholder="جزئیات" class="input input-bordered input-accent w-full"/>
-          <select ngModel name="neighborhood" class="select select-accent w-full">
+          <input type="text" ngModel name="title" placeholder="عنوان" class="input input-bordered input-accent w-full"/>
+          <input type="" ngModel name="description" placeholder="جزئیات" class="input input-bordered input-accent w-full"/>
+          <select ngModel name="neighbourhood" class="select select-accent w-full">
             <option disabled selected class="hidden" value="">محله</option>
-            <option value="">نیروهوای</option>
-            <option value="">تهران پارس</option>
-            <option value="">تهران نو</option>
-            <option value="">افسریه</option>
-            <option value="">پونک</option>
+            <option *ngFor="let neighbourhood of neighbourhoods" value="{{ neighbourhood.id }}">{{ neighbourhood.title }}</option>
           </select>
           <div class="flex flex-row justify-start">
             <button class="btn btn-accent px-6">ارسال</button>
@@ -84,30 +80,23 @@
         </thead>
         <tbody>
         <!-- row 1 -->
-        <tr class="hover" onclick="my_modal_5.showModal()">
-          <th class="text-right">1</th>
-          <td class="text-right">آرایشگاه رخ ۱</td>
-          <td class="text-right">خیابان سی متری نیروهوایی - خیابان بصیر - خیابان افضلی - کوچه ۱۳/۳۴ - پلاک ۲۵ واحد </td>
-        </tr>
-        <!-- row 2 -->
-        <tr class="hover" onclick="my_modal_5.showModal()">
-          <th class="text-right">2</th>
-          <td class="text-right">آرایشگاه رخ ۲</td>
-          <td class="text-right">خیابان سی متری نیروهوایی - خیابان بصیر - خیابان افضلی - کوچه ۱۳/۳۴ - پلاک ۲۵ واحد </td>
+        <tr *ngFor="let store of stores; let i = index" class="hover" onclick="my_modal_5.showModal()">
+          <th class="text-right">{{ i + 1 }}</th>
+          <td class="text-right"> <a href="./store/{{ store.id }}">{{ store.title }}</a></td>
+          <td class="text-right"> {{ getAddressById(store.address)?.description }} </td>
         </tr>
         </tbody>
       </table>
     </div>
     <button class="btn w-max btn-accent" onclick="my_modal_4.showModal()">افزودن آرایشگاه</button>
     <dialog id="my_modal_4" class="modal">
-      <form method="dialog" class="modal-box">
+      <form #addStoreForm="ngForm" (ngSubmit)="storeSubmit(addStoreForm)" method="dialog" class="modal-box">
         <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
         <div class="flex flex-col space-y-4 md:p-20">
-          <input type="text" ngModel name="email" placeholder="عنوان" class="input input-bordered input-accent w-full"/>
+          <input type="text" ngModel name="title" placeholder="عنوان" class="input input-bordered input-accent w-full"/>
           <select ngModel name="address" class="select select-accent w-full max-w-xs">
             <option disabled selected class="hidden" value="">آدرس</option>
-            <option value="">خانه خودم</option>
-            <option value="">شرکت</option>
+            <option *ngFor="let address of userAddresses" value="{{ address.id }}">{{ address.title }}</option>
           </select>
           <div class="flex flex-row justify-start">
             <button class="btn btn-accent px-6">ارسال</button>
@@ -122,8 +111,7 @@
         <div class="flex flex-col space-y-4 md:p-20">
           <select ngModel name="store" class="select select-accent w-full max-w-xs">
             <option disabled selected class="hidden" value="">خدمات مورد نظر</option>
-            <option value="">مانیکور</option>
-            <option value="">پدیکور</option>
+            <option *ngFor="let service of services" value="{{ service.id }}">{{ service.title }}</option>
           </select>
           <input type="date" ngModel name="birthDate" placeholder="روز" class="input input-bordered input-accent w-full max-w-xs"/>
           <input type="time" ngModel name="birthDate" placeholder="زمان شروع" class="input input-bordered input-accent w-full max-w-xs"/>

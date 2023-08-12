@@ -34,4 +34,8 @@ export class HomeComponent {
     this.router.navigate(['']);
   }
 
+  redirect_to_detail(id: string) {
+    this.router.navigate([`/store/${id}`]);
+  }
+
 }

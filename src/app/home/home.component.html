@@ -46,7 +46,7 @@
             <h2 class="card-title">{{store['title']}}</h2>
             <p>به خودت برس</p>
             <div class="card-actions justify-end">
-              <button class="btn btn-primary">نوبت دهی</button>
+              <button (click)="redirect_to_detail(store['id'])" class="btn btn-primary">نوبت دهی</button>
             </div>
           </div>
         </div>
