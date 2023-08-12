@@ -53,6 +53,10 @@ export class ProfileComponent {
   addAppointment() {
     this.http.addAddress().subscribe(data => {
       // add returned data to Adresses
+    }, error => {
+      if (error.status == 401) {
+        this.router.navigate(['/sign-in']);
+      }
     })
   }
 
