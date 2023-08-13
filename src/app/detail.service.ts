@@ -23,4 +23,10 @@ export class DetailService {
     return this.http.get(`${enviroment.apiurl}/accounts/addresses/${id}/`, {headers: {'Authorization': `JWT ${token}`}});
   }
 
+  getAppointmentsByDate(date: string): Observable<any> {
+    let finalData: UserDataInterface;
+    const token = localStorage.getItem('access_token');
+    return this.http.get(`${enviroment.apiurl}/store/stores/1/appointments/?date=${date}`, {headers: {'Authorization': `JWT ${token}`}});
+  }
+
 }

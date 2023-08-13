@@ -3,6 +3,7 @@ import {Router, ActivatedRoute, ParamMap} from "@angular/router";
 import {DetailService} from "../detail.service";
 import {StoreInterface} from "../store-interface";
 import {AddressInterface} from "../address-interface";
+import {AppointmentInterface} from "../appointment-interface";
 
 @Component({
   selector: 'app-detail',
@@ -17,6 +18,9 @@ export class DetailComponent {
     title: "",
     id: 0,
   };
+
+  appointments: AppointmentInterface[] = [];
+
   address: AddressInterface = {
     id: 0,
     title: "",
@@ -36,6 +40,17 @@ export class DetailComponent {
   setAddress() {
     this.http.getAddressById(this.store.address).subscribe(address => {
       this.address = address;
+    }, error => {
+      if (error.status == 401) {
+        this.router.navigate(['/sign-in']);
+      }
+    })
+  }
+
+  getAppointments(appointmentDateForm: any) {
+    let dateString = appointmentDateForm.value.date
+    this.http.getAppointmentsByDate(dateString).subscribe(appointments => {
+      this.appointments = appointments;
     }, error => {
       if (error.status == 401) {
         this.router.navigate(['/sign-in']);

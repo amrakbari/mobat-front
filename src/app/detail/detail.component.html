@@ -25,7 +25,9 @@
   <div class="mb-4 flex flex-col w-4/5 mx-auto bg-base-300 shadow-md p-6 rounded-lg">
     <div class="text-lg font-semibold mb-2 text-white">نوبت ها</div>
 <!--    on change call api to filter date-->
-    <input type="date" ngModel name="date" placeholder="روز" class="input input-bordered input-accent w-full md:min-w-[400px]"/>
+    <form #appointmentDateForm="ngForm" (ngSubmit)="getAppointments(appointmentDateForm)" method="dialog" class="modal-box">
+      <input type="date" ngModel name="date" placeholder="روز" class="input input-bordered input-accent w-full md:min-w-[400px]"/>
+    </form>
     <div class="overflow-x-auto pb-4">
       <table class="table">
         <!-- head -->
@@ -39,15 +41,8 @@
         </thead>
         <tbody>
         <!-- row 1 -->
-        <tr class="hover" onclick="my_modal_5.showModal()">
-          <th class="text-right">1</th>
-          <td class="text-right">۱۴۰۲/۰۵/۲۲</td>
-          <td class="text-right">۱۵:۳۰</td>
-          <td class="text-right">۱۷:۳۰</td>
-        </tr>
-        <!-- row 2 -->
-        <tr class="hover" onclick="my_modal_5.showModal()">
-          <th class="text-right">1</th>
+        <tr *ngFor="let appointment of appointments; let i = index" class="hover" onclick="my_modal_5.showModal()">
+          <th class="text-right">{{ i + 1 }}</th>
           <td class="text-right">۱۴۰۲/۰۵/۲۲</td>
           <td class="text-right">۱۵:۳۰</td>
           <td class="text-right">۱۷:۳۰</td>
