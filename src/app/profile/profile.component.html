@@ -85,10 +85,10 @@
           <td class="text-right"> <a href="./store/{{ store.id }}">{{ store.title }}</a></td>
           <td class="text-right"> {{ getAddressById(store.address)?.description }} </td>
           <td class="text-right">
-            <button onclick="my_modal_5.showModal()" class="btn btn-outline btn-success">افزودن نوبت</button>
+            <button (click)="setSelectedStore(store)" onclick="my_modal_5.showModal()" class="btn btn-outline btn-success">افزودن نوبت</button>
           </td>
           <td class="text-right">
-            <button onclick="my_modal_6.showModal()" class="btn btn-outline btn-info">افزودن خدمات</button>
+            <button (click)="setSelectedStore(store)" onclick="my_modal_6.showModal()" class="btn btn-outline btn-info">افزودن خدمات</button>
           </td>
         </tr>
         </tbody>
@@ -111,17 +111,13 @@
       </form>
     </dialog>
     <dialog id="my_modal_5" class="modal">
-      <form method="dialog" class="modal-box">
+      <form #appointmentForm="ngForm" (ngSubmit)="appointmentSubmit(appointmentForm)" method="dialog" class="modal-box">
         <h4 class="font-bold text-lg mt-5">افزودن نوبت</h4>
         <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
         <div class="flex flex-col space-y-4 md:p-20">
-          <select ngModel name="store" class="select select-accent w-full max-w-xs">
-            <option disabled selected class="hidden" value="">خدمات مورد نظر</option>
-            <option *ngFor="let service of services" value="{{ service.id }}">{{ service.title }}</option>
-          </select>
-          <input type="date" ngModel name="birthDate" placeholder="روز" class="input input-bordered input-accent w-full max-w-xs"/>
-          <input type="time" ngModel name="birthDate" placeholder="زمان شروع" class="input input-bordered input-accent w-full max-w-xs"/>
-          <input type="time" ngModel name="birthDate" placeholder="زمان پایان" class="input input-bordered input-accent w-full max-w-xs"/>
+          <input type="date" ngModel name="day" placeholder="روز" class="input input-bordered input-accent w-full max-w-xs"/>
+          <input type="time" ngModel name="start" placeholder="زمان شروع" class="input input-bordered input-accent w-full max-w-xs"/>
+          <input type="time" ngModel name="end" placeholder="زمان پایان" class="input input-bordered input-accent w-full max-w-xs"/>
           <div class="flex flex-row justify-start">
             <button class="btn btn-accent px-6">ارسال</button>
           </div>
@@ -129,11 +125,11 @@
       </form>
     </dialog>
     <dialog id="my_modal_6" class="modal">
-      <form method="dialog" class="modal-box">
+      <form #serviceStoreForm="ngForm" (ngSubmit)="addServiceToStore(serviceStoreForm)" method="dialog" class="modal-box">
         <h4 class="font-bold text-lg mt-5">افزودن نوبت</h4>
         <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
         <div class="flex flex-col space-y-4 md:p-20">
-          <select ngModel name="store" class="select select-accent w-full max-w-xs">
+          <select ngModel name="service" class="select select-accent w-full max-w-xs">
             <option disabled selected class="hidden" value="">خدمات مورد نظر</option>
             <option *ngFor="let service of services" value="{{ service.id }}">{{ service.title }}</option>
           </select>

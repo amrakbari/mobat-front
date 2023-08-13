@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import { Router } from "@angular/router";
 import {ProfileService} from "../profile.service";
 import {UserDataInterface} from "../user-data-interface";
@@ -11,6 +11,8 @@ import {SignUpInterface} from "../sign-up-interface";
 import {AddressInInterface} from "../address-in-interface";
 import {NeighbourhoodInterface} from "../neighbourhood-interface";
 import {StoreInInterface} from "../store-in-interface";
+import {AppointmentInInterface} from "../appointment-in-interface";
+import {ServiceStoreInterface} from "../service-store-interface";
 
 @Component({
   selector: 'app-profile',
@@ -24,7 +26,7 @@ export class ProfileComponent {
     last_name: "",
     role: "",
   };
-
+  selectedStore: any;
   userAddresses: AddressInterface[] = []
   services: ServiceInterface[] = []
   stores: StoreInterface[] = []
@@ -123,6 +125,39 @@ export class ProfileComponent {
     this.http.addAddress(body).subscribe(address => {
       this.userAddresses.push(address)
     })
+  }
+
+  addServiceToStore(serviceStoreForm: any) {
+    let body: ServiceStoreInterface = {
+      store: this.selectedStore.id,
+      service: serviceStoreForm.value.service,
+    }
+    this.http.addServiceToStore(body).subscribe(service => {
+      // add service
+    })
+  }
+
+  appointmentSubmit(appointmentForm: any) {
+    let day = appointmentForm.value.day
+    let startTime = appointmentForm.value.start
+    let endTime = appointmentForm.value.end
+    let startTimeString = day + 'T' + startTime + ':00Z'
+    let endTimeString = day + 'T' + endTime + ':00Z'
+    let body: AppointmentInInterface = {
+      store: this.selectedStore.id,
+      start_datetime: startTimeString,
+      end_datetime: endTimeString,
+    }
+    this.http.addAppointment(body).subscribe(data => {
+      console.log(data);
+    }, error => {
+      console.log(error)
+    })
+  }
+
+  setSelectedStore(store: any) {
+    console.log(store.id)
+    this.selectedStore = store;
   }
 
   redirect_to_home() {
