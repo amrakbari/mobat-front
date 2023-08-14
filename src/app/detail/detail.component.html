@@ -50,6 +50,7 @@
         </tbody>
       </table>
     </div>
+    <button onclick="my_modal_appointment.showModal()" class="btn btn-outline btn-success max-w-max">افزودن نوبت</button>
     <dialog id="my_modal_5" class="modal">
       <form method="dialog" class="modal-box">
         <h4 class="font-bold text-lg mt-5">افزودن نوبت</h4>
@@ -60,6 +61,20 @@
             <option value="">مانیکور</option>
             <option value="">پدیکور</option>
           </select>
+          <div class="flex flex-row justify-start">
+            <button class="btn btn-accent px-6">ارسال</button>
+          </div>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="my_modal_appointment" class="modal">
+      <form #appointmentForm="ngForm" (ngSubmit)="appointmentSubmit(appointmentForm)" method="dialog" class="modal-box">
+        <h4 class="font-bold text-lg mt-5">افزودن نوبت</h4>
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+        <div class="flex flex-col space-y-4 md:p-20">
+          <input type="date" ngModel name="day" placeholder="روز" class="input input-bordered input-accent w-full max-w-xs"/>
+          <input type="time" ngModel name="start" placeholder="زمان شروع" class="input input-bordered input-accent w-full max-w-xs"/>
+          <input type="time" ngModel name="end" placeholder="زمان پایان" class="input input-bordered input-accent w-full max-w-xs"/>
           <div class="flex flex-row justify-start">
             <button class="btn btn-accent px-6">ارسال</button>
           </div>
