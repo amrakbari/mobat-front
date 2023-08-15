@@ -50,7 +50,7 @@
         </tbody>
       </table>
     </div>
-    <button onclick="my_modal_appointment.showModal()" class="btn btn-outline btn-success max-w-max">افزودن نوبت</button>
+    <button *ngIf="isAdmin" onclick="my_modal_appointment.showModal()" class="btn btn-outline btn-success max-w-max">افزودن نوبت</button>
     <dialog id="my_modal_5" class="modal">
       <form method="dialog" class="modal-box">
         <h4 class="font-bold text-lg mt-5">افزودن نوبت</h4>
