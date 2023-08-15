@@ -25,8 +25,8 @@
   <div class="mb-4 flex flex-col w-4/5 mx-auto bg-base-300 shadow-md p-6 rounded-lg">
     <div class="text-lg font-semibold mb-2 text-white">نوبت ها</div>
 <!--    on change call api to filter date-->
-    <form #appointmentDateForm="ngForm" (ngSubmit)="getAppointments(appointmentDateForm)" method="dialog" class="modal-box">
-      <input type="date" ngModel name="date" placeholder="روز" class="input input-bordered input-accent w-full md:min-w-[400px]"/>
+    <form method="dialog" class="modal-box">
+      <input [(ngModel)]="selectedDate" (ngModelChange)="getAppointments()" type="date" ngModel name="date" placeholder="روز" class="input input-bordered input-accent w-full md:min-w-[400px]"/>
     </form>
     <div class="overflow-x-auto pb-4">
       <table class="table">
@@ -37,20 +37,30 @@
           <th class="text-right">تاریخ</th>
           <th class="text-right">از ساعت</th>
           <th class="text-right">تا ساعت</th>
+          <th *ngIf="isAdmin" class="text-right">دریافت شده توسط</th>
         </tr>
         </thead>
         <tbody>
         <!-- row 1 -->
         <tr *ngFor="let appointment of appointments; let i = index" class="hover" onclick="my_modal_5.showModal()">
           <th class="text-right">{{ i + 1 }}</th>
-          <td class="text-right">۱۴۰۲/۰۵/۲۲</td>
-          <td class="text-right">۱۵:۳۰</td>
-          <td class="text-right">۱۷:۳۰</td>
+          <td class="text-right">{{ appointment.start_datetime | date:'yyyy/MM/dd' | persianDigits }}</td>
+          <td class="text-right">{{ appointment.start_datetime | date:'HH:mm' | persianDigits}}</td>
+          <td class="text-right">{{ appointment.end_datetime |  date:'HH:mm' | persianDigits }}</td>
+          <button *ngIf="isAdmin" onclick="admit.showModal()" class="btn btn-xs btn-success max-w-max mx-1">دریافت</button>
+          <button *ngIf="isAdmin" onclick="admit.showModal()" class="btn btn-xs btn-error max-w-max mx-1">حذف</button>
         </tr>
         </tbody>
       </table>
     </div>
     <button *ngIf="isAdmin" onclick="my_modal_appointment.showModal()" class="btn btn-outline btn-success max-w-max">افزودن نوبت</button>
+    <button *ngIf="isAdmin" onclick="admit.showModal()" class="btn btn-outline btn-warning max-w-max">افزودن نوبت به صورت اتوماتیک</button>
+    <dialog id="admit" class="modal">
+      <form (ngSubmit)="appointmentBulkSubmit()" method="dialog" class="modal-box">
+        <h5 class="font-bold text-lg mt-5">آیا افزودن نوبت به صورت خودکار را تایید میکنید؟</h5>
+        <button class="btn btn-outline btn-success max-w-max mt-4">تایید</button>
+      </form>
+    </dialog>
     <dialog id="my_modal_5" class="modal">
       <form method="dialog" class="modal-box">
         <h4 class="font-bold text-lg mt-5">افزودن نوبت</h4>

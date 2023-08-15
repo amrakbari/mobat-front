@@ -5,6 +5,7 @@ import {StoreInterface} from "../store-interface";
 import {AddressInterface} from "../address-interface";
 import {AppointmentInterface} from "../appointment-interface";
 import {AppointmentInInterface} from "../appointment-in-interface";
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-detail',
@@ -23,6 +24,7 @@ export class DetailComponent {
   appointments: AppointmentInterface[] = [];
 
   isAdmin: boolean = false;
+  selectedDate: string = "";
 
   address: AddressInterface = {
     id: 0,
@@ -51,14 +53,14 @@ export class DetailComponent {
     })
   }
 
-  getAppointments(appointmentDateForm: any) {
-    let dateString = appointmentDateForm.value.date;
-    this.setAppointment(dateString);
-
+  getAppointments() {
+    this.setAppointment(this.selectedDate);
   }
 
+
   setAppointment(dateString: string) {
-    this.http.getAppointmentsByDate(dateString).subscribe(appointments => {
+    console.log(dateString)
+    this.http.getAppointmentsByDate(dateString, this.store.id).subscribe(appointments => {
       this.appointments = appointments;
     }, error => {
       if (error.status == 401) {
@@ -94,7 +96,40 @@ export class DetailComponent {
     })
   }
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: DetailService) {
+  appointmentBulkSubmit() {
+    let day = this.selectedDate;
+
+    // Define the start and end times for the loop
+    let startTime = 8; // 8 AM
+    let endTime = 20; // 8 PM
+
+    // Loop through the time intervals
+    for (let i = startTime; i < endTime; i += 2) {
+      let startHour = i.toString().padStart(2, '0'); // Add leading zero if needed
+      let endHour = (i + 2).toString().padStart(2, '0'); // Add leading zero if needed
+
+      let startTimeString = day + 'T' + startHour + ':01:00Z';
+      let endTimeString = day + 'T' + endHour + ':00:00Z';
+
+      let body: AppointmentInInterface = {
+        store: this.store.id,
+        start_datetime: startTimeString,
+        end_datetime: endTimeString,
+      };
+
+      this.http.addAppointment(body).subscribe(
+        data => {
+          console.log(data);
+          this.setAppointment(day);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    }
+  }
+
+  constructor(private router: Router, private route: ActivatedRoute, private http: DetailService, private datePipe: DatePipe) {
     this.route.paramMap.subscribe(params => {
       this.id = params.get('id');
     });
@@ -103,6 +138,17 @@ export class DetailComponent {
 
   redirect_to_home() {
     this.router.navigate(['']);
+  }
+
+  convertToPersianDigits(timeString: string) {
+    const westernDigits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    const persianDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+
+    for (let i = 0; i < 10; i++) {
+      timeString = timeString.replace(new RegExp(westernDigits[i], 'g'), persianDigits[i]);
+    }
+
+    return timeString;
   }
 
 }
