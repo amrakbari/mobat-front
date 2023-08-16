@@ -6,6 +6,8 @@ import {AddressInterface} from "../address-interface";
 import {AppointmentInterface} from "../appointment-interface";
 import {AppointmentInInterface} from "../appointment-in-interface";
 import { DatePipe } from '@angular/common';
+import {ServiceInterface} from "../service-interface";
+import {error} from "@angular/compiler-cli/src/transformers/util";
 
 @Component({
   selector: 'app-detail',
@@ -21,7 +23,11 @@ export class DetailComponent {
     id: 0,
   };
 
+  selectedAppointment: any;
   appointments: AppointmentInterface[] = [];
+  services: ServiceInterface[] = []
+
+
 
   isAdmin: boolean = false;
   selectedDate: string = "";
@@ -36,9 +42,29 @@ export class DetailComponent {
       this.store = store;
       this.setAddress();
       this.getIfUserIsAdmin();
+      this.getServices();
     }, error => {
       if (error.status == 401) {
         this.router.navigate(['/sign-in'])
+      }
+    })
+  }
+
+  getUserFromProfile(userId: any) {
+    this.http.getUserFromProfile(userId).subscribe(user => {
+      return user;
+    }, error => {
+      if (error.status == 401) {
+        this.router.navigate(['/sign-in']);
+      }
+    })
+  }
+
+  getAppointmentForUserSubmit(form: any) {
+    this.http.getAppointmentForUser(form.value.service, this.selectedAppointment.id).subscribe(appointment => {
+      let selectedAppointmentIndex = this.appointments.findIndex(o => o.id === appointment.id);
+      if (selectedAppointmentIndex !== -1) {
+        this.appointments[selectedAppointmentIndex].user = appointment.user;
       }
     })
   }
@@ -55,6 +81,10 @@ export class DetailComponent {
 
   getAppointments() {
     this.setAppointment(this.selectedDate);
+  }
+
+  setSelectedAppointment(appointemnt: any) {
+    this.selectedAppointment = appointemnt;
   }
 
 
@@ -93,6 +123,16 @@ export class DetailComponent {
       this.setAppointment(day);
     }, error => {
       console.log(error)
+    })
+  }
+
+  getServices() {
+    this.http.getServices(this.store.id).subscribe(services => {
+      this.services = services;
+    }, error => {
+      if (error.status == 401) {
+        this.router.navigate(['/sign-in']);
+      }
     })
   }
 
@@ -138,17 +178,6 @@ export class DetailComponent {
 
   redirect_to_home() {
     this.router.navigate(['']);
-  }
-
-  convertToPersianDigits(timeString: string) {
-    const westernDigits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-    const persianDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
-
-    for (let i = 0; i < 10; i++) {
-      timeString = timeString.replace(new RegExp(westernDigits[i], 'g'), persianDigits[i]);
-    }
-
-    return timeString;
   }
 
 }

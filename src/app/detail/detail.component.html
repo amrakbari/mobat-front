@@ -42,13 +42,14 @@
         </thead>
         <tbody>
         <!-- row 1 -->
-        <tr *ngFor="let appointment of appointments; let i = index" class="hover" onclick="my_modal_5.showModal()">
+        <tr *ngFor="let appointment of appointments; let i = index" class="hover">
           <th class="text-right">{{ i + 1 }}</th>
           <td class="text-right">{{ appointment.start_datetime | date:'yyyy/MM/dd' | persianDigits }}</td>
           <td class="text-right">{{ appointment.start_datetime | date:'HH:mm' | persianDigits}}</td>
           <td class="text-right">{{ appointment.end_datetime |  date:'HH:mm' | persianDigits }}</td>
-          <button *ngIf="isAdmin" onclick="admit.showModal()" class="btn btn-xs btn-success max-w-max mx-1">دریافت</button>
-          <button *ngIf="isAdmin" onclick="admit.showModal()" class="btn btn-xs btn-error max-w-max mx-1">حذف</button>
+          <td class="text-right">{{ getUserFromProfile(appointment.user) }}</td>
+          <button *ngIf="isAdmin" (click)="setSelectedAppointment(appointment)" onclick="my_modal_5.showModal()" class="btn btn-xs btn-success max-w-max mx-1">دریافت</button>
+          <button *ngIf="isAdmin" (click)="setSelectedAppointment(appointments)" onclick="admit.showModal()" class="btn btn-xs btn-error max-w-max mx-1">حذف</button>
         </tr>
         </tbody>
       </table>
@@ -62,14 +63,13 @@
       </form>
     </dialog>
     <dialog id="my_modal_5" class="modal">
-      <form method="dialog" class="modal-box">
-        <h4 class="font-bold text-lg mt-5">افزودن نوبت</h4>
+      <form #receiveAppointmentForm="ngForm" (ngSubmit)="getAppointmentForUserSubmit(receiveAppointmentForm)" method="dialog" class="modal-box">
+        <h4 class="font-bold text-lg mt-5">دریافت نوبت</h4>
         <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
         <div class="flex flex-col space-y-4 md:p-20">
-          <select ngModel name="store" class="select select-accent w-full max-w-xs">
+          <select ngModel name="service" class="select select-accent w-full max-w-xs">
             <option disabled selected class="hidden" value="">خدمات مورد نظر</option>
-            <option value="">مانیکور</option>
-            <option value="">پدیکور</option>
+            <option *ngFor="let service of services" value="{{ service.id }}">{{ service.title }}</option>
           </select>
           <div class="flex flex-row justify-start">
             <button class="btn btn-accent px-6">ارسال</button>

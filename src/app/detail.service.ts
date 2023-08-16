@@ -30,6 +30,16 @@ export class DetailService {
     return this.http.get(`${enviroment.apiurl}/store/stores/${storeId}/appointments/?date=${date}`, {headers: {'Authorization': `JWT ${token}`}});
   }
 
+  getServices(storeId: any): Observable<any> {
+    const token = localStorage.getItem('access_token');
+    return this.http.get(`${enviroment.apiurl}/store/stores/${storeId}/services/`, {headers: {'Authorization': `JWT ${token}`}});
+  }
+
+  getUserFromProfile(profileId: any): Observable<any> {
+    const token = localStorage.getItem('access_token');
+    return this.http.get(`${enviroment.apiurl}/store/stores/profiles/${profileId}/`, {headers: {'Authorization': `JWT ${token}`}});
+  }
+
   getUser(): Observable<any> {
     let finalData: UserDataInterface;
     const token = localStorage.getItem('access_token');
@@ -44,6 +54,15 @@ export class DetailService {
   deleteAppointment(id: any): Observable<any> {
     const token = localStorage.getItem('access_token');
     return this.http.delete(`${enviroment.apiurl}/store/appointments/${id}/`, {headers: {'Authorization': `JWT ${token}`}});
+  }
+
+  getAppointmentForUser(service_id: any, appointment_id: any): Observable<any> {
+    const token = localStorage.getItem('access_token');
+    let body = {
+      service: parseInt(service_id),
+      id: appointment_id,
+    };
+    return this.http.post(`${enviroment.apiurl}/store/stores/set-appointment-for-user/`, body, {headers: {'Authorization': `JWT ${token}`}});
   }
 
 }
