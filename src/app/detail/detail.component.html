@@ -38,6 +38,7 @@
           <th class="text-right">از ساعت</th>
           <th class="text-right">تا ساعت</th>
           <th *ngIf="isAdmin" class="text-right">دریافت شده توسط</th>
+          <th *ngIf="isAdmin" class="text-right">خدمات</th>
         </tr>
         </thead>
         <tbody>
@@ -47,15 +48,18 @@
           <td class="text-right">{{ appointment.start_datetime | date:'yyyy/MM/dd' | persianDigits }}</td>
           <td class="text-right">{{ appointment.start_datetime | date:'HH:mm' | persianDigits}}</td>
           <td class="text-right">{{ appointment.end_datetime |  date:'HH:mm' | persianDigits }}</td>
-          <td class="text-right">{{ getUserFromProfile(appointment.user) }}</td>
-          <button *ngIf="isAdmin" (click)="setSelectedAppointment(appointment)" onclick="my_modal_5.showModal()" class="btn btn-xs btn-success max-w-max mx-1">دریافت</button>
+          <td *ngIf="isAdmin" class="text-right">{{ userMap.get(appointment.id) }}</td>
+          <td *ngIf="isAdmin" class="text-right">{{ serviceMap.get(appointment.id) }}</td>
+          <button (click)="setSelectedAppointment(appointment)" onclick="my_modal_5.showModal()" class="btn btn-xs btn-success max-w-max mx-1">دریافت</button>
           <button *ngIf="isAdmin" (click)="setSelectedAppointment(appointments)" onclick="admit.showModal()" class="btn btn-xs btn-error max-w-max mx-1">حذف</button>
         </tr>
         </tbody>
       </table>
     </div>
-    <button *ngIf="isAdmin" onclick="my_modal_appointment.showModal()" class="btn btn-outline btn-success max-w-max">افزودن نوبت</button>
-    <button *ngIf="isAdmin" onclick="admit.showModal()" class="btn btn-outline btn-warning max-w-max">افزودن نوبت به صورت اتوماتیک</button>
+    <div class="flex flex-row">
+      <button *ngIf="isAdmin" onclick="my_modal_appointment.showModal()" class="btn btn-outline btn-success max-w-max mx-2">افزودن نوبت</button>
+      <button *ngIf="isAdmin" onclick="admit.showModal()" class="btn btn-outline btn-warning max-w-max mx-2">افزودن نوبت به صورت اتوماتیک</button>
+    </div>
     <dialog id="admit" class="modal">
       <form (ngSubmit)="appointmentBulkSubmit()" method="dialog" class="modal-box">
         <h5 class="font-bold text-lg mt-5">آیا افزودن نوبت به صورت خودکار را تایید میکنید؟</h5>

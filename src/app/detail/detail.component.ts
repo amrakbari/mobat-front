@@ -23,6 +23,8 @@ export class DetailComponent {
     id: 0,
   };
 
+  userMap: Map<any, string> = new Map();
+  serviceMap: Map<any, string> = new Map();
   selectedAppointment: any;
   appointments: AppointmentInterface[] = [];
   services: ServiceInterface[] = []
@@ -37,6 +39,13 @@ export class DetailComponent {
     title: "",
     description: "",
   };
+
+  compareStartDatetime(a: AppointmentInterface, b: AppointmentInterface): number {
+    const dateA = new Date(a.start_datetime);
+    const dateB = new Date(b.start_datetime);
+    return dateA.getTime() - dateB.getTime();
+  }
+
   setStore() {
     this.http.getStoreById(this.id).subscribe(store => {
       this.store = store;
@@ -50,9 +59,19 @@ export class DetailComponent {
     })
   }
 
-  getUserFromProfile(userId: any) {
+  getUserFromProfile(userId: any, appointmentId: any) {
     this.http.getUserFromProfile(userId).subscribe(user => {
-      return user;
+      this.userMap.set(appointmentId, user.email);
+    }, error => {
+      if (error.status == 401) {
+        this.router.navigate(['/sign-in']);
+      }
+    })
+  }
+
+  getServiceFromId(serviceId: any, appointmentId: any) {
+    this.http.getServiceById(serviceId).subscribe(service => {
+      this.serviceMap.set(appointmentId, service.title);
     }, error => {
       if (error.status == 401) {
         this.router.navigate(['/sign-in']);
@@ -62,10 +81,7 @@ export class DetailComponent {
 
   getAppointmentForUserSubmit(form: any) {
     this.http.getAppointmentForUser(form.value.service, this.selectedAppointment.id).subscribe(appointment => {
-      let selectedAppointmentIndex = this.appointments.findIndex(o => o.id === appointment.id);
-      if (selectedAppointmentIndex !== -1) {
-        this.appointments[selectedAppointmentIndex].user = appointment.user;
-      }
+      this.setAppointment(this.selectedDate)
     })
   }
 
@@ -89,9 +105,18 @@ export class DetailComponent {
 
 
   setAppointment(dateString: string) {
-    console.log(dateString)
     this.http.getAppointmentsByDate(dateString, this.store.id).subscribe(appointments => {
       this.appointments = appointments;
+      this.appointments.sort(this.compareStartDatetime);
+      appointments.forEach((appointment: any) => {
+        if (appointment.user !== undefined) {
+          this.getUserFromProfile(appointment.user, appointment.id);
+        }
+        if (appointment.service !== undefined) {
+          this.getServiceFromId(appointment.service, appointment.id);
+        }
+      })
+
     }, error => {
       if (error.status == 401) {
         this.router.navigate(['/sign-in']);
