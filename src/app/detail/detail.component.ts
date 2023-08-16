@@ -8,6 +8,7 @@ import {AppointmentInInterface} from "../appointment-in-interface";
 import { DatePipe } from '@angular/common';
 import {ServiceInterface} from "../service-interface";
 import {error} from "@angular/compiler-cli/src/transformers/util";
+import {data} from "autoprefixer";
 
 @Component({
   selector: 'app-detail',
@@ -103,6 +104,15 @@ export class DetailComponent {
     this.selectedAppointment = appointemnt;
   }
 
+  deleteAppointment(appointmentId: any) {
+    this.http.deleteAppointment(appointmentId).subscribe(data => {
+      this.setAppointment(this.selectedDate);
+    }, error => {
+      if (error.status == 401) {
+        this.router.navigate(['/sign-in']);
+      }
+    })
+  }
 
   setAppointment(dateString: string) {
     this.http.getAppointmentsByDate(dateString, this.store.id).subscribe(appointments => {

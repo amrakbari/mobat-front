@@ -43,15 +43,15 @@
         </thead>
         <tbody>
         <!-- row 1 -->
-        <tr *ngFor="let appointment of appointments; let i = index" class="hover">
+        <tr *ngFor="let appointment of appointments; let i = index" [ngClass]="{'hover': appointment.user === null,'bg-neutral': appointment.user !== null}">
           <th class="text-right">{{ i + 1 }}</th>
           <td class="text-right">{{ appointment.start_datetime | date:'yyyy/MM/dd' | persianDigits }}</td>
           <td class="text-right">{{ appointment.start_datetime | date:'HH:mm' | persianDigits}}</td>
           <td class="text-right">{{ appointment.end_datetime |  date:'HH:mm' | persianDigits }}</td>
           <td *ngIf="isAdmin" class="text-right">{{ userMap.get(appointment.id) }}</td>
           <td *ngIf="isAdmin" class="text-right">{{ serviceMap.get(appointment.id) }}</td>
-          <button (click)="setSelectedAppointment(appointment)" onclick="my_modal_5.showModal()" class="btn btn-xs btn-success max-w-max mx-1">دریافت</button>
-          <button *ngIf="isAdmin" (click)="setSelectedAppointment(appointments)" onclick="admit.showModal()" class="btn btn-xs btn-error max-w-max mx-1">حذف</button>
+          <button [disabled]="appointment.user !== null" (click)="setSelectedAppointment(appointment)" onclick="my_modal_5.showModal()" class="btn btn-xs btn-success max-w-max mx-1  my-3">دریافت</button>
+          <button *ngIf="isAdmin" (click)="deleteAppointment(appointment.id)" class="btn btn-xs btn-error max-w-max mx-1">حذف</button>
         </tr>
         </tbody>
       </table>
