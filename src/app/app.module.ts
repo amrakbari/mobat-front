@@ -10,6 +10,8 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import { SignInComponent } from './sign-in/sign-in.component';
 import { ProfileComponent } from './profile/profile.component';
 import { DetailComponent } from './detail/detail.component';
+import { DatePipe } from '@angular/common';
+import { PersianDigitsPipe } from './persian-digits.pipe';
 
 
 @NgModule({
@@ -20,6 +22,7 @@ import { DetailComponent } from './detail/detail.component';
     SignInComponent,
     ProfileComponent,
     DetailComponent,
+    PersianDigitsPipe,
   ],
     imports: [
       BrowserModule,
@@ -27,7 +30,9 @@ import { DetailComponent } from './detail/detail.component';
       FormsModule,
       HttpClientModule,
     ],
-  providers: [],
+  providers: [
+    DatePipe,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -51,6 +51,7 @@
     <button class="btn w-max btn-accent" onclick="my_modal_3.showModal()">افزودن آدرس</button>
     <dialog id="my_modal_3" class="modal">
       <form #addAddressForm="ngForm" (ngSubmit)="addressSubmit(addAddressForm)" method="dialog" class="modal-box">
+        <h4 class="font-bold text-lg mt-5">افزودن آدرس</h4>
         <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
         <div class="flex flex-col space-y-4 md:p-20">
           <input type="text" ngModel name="title" placeholder="عنوان" class="input input-bordered input-accent w-full"/>
@@ -85,7 +86,7 @@
           <td class="text-right"> <a href="./store/{{ store.id }}">{{ store.title }}</a></td>
           <td class="text-right"> {{ getAddressById(store.address)?.description }} </td>
           <td class="text-right">
-            <button (click)="setSelectedStore(store)" onclick="my_modal_5.showModal()" class="btn btn-outline btn-success">افزودن نوبت</button>
+<!--            <button (click)="setSelectedStore(store)" onclick="my_modal_5.showModal()" class="btn btn-outline btn-success">افزودن نوبت</button>-->
           </td>
           <td class="text-right">
             <button (click)="setSelectedStore(store)" onclick="my_modal_6.showModal()" class="btn btn-outline btn-info">افزودن خدمات</button>
@@ -126,7 +127,7 @@
     </dialog>
     <dialog id="my_modal_6" class="modal">
       <form #serviceStoreForm="ngForm" (ngSubmit)="addServiceToStore(serviceStoreForm)" method="dialog" class="modal-box">
-        <h4 class="font-bold text-lg mt-5">افزودن نوبت</h4>
+        <h4 class="font-bold text-lg mt-5">افزودن خدمات</h4>
         <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
         <div class="flex flex-col space-y-4 md:p-20">
           <select ngModel name="service" class="select select-accent w-full max-w-xs">
