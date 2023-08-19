@@ -5,7 +5,7 @@ COPY package*.json ./
 RUN npm install
 RUN npm install -g @angular/cli
 COPY . .
-RUN ng build --prod
+RUN ng build
 
 # Stage 2: Serve the Angular app using NGINX
 FROM nginx:alpine
