@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {HomePageServiceService} from "../home-page-service.service";
-import { Router } from "@angular/router";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -10,6 +10,7 @@ import { Router } from "@angular/router";
 export class HomeComponent {
   stores = [];
   services = [];
+  addresses = [];
 
   constructor(private http: HomePageServiceService, private router: Router) {
 
@@ -28,6 +29,14 @@ export class HomeComponent {
         this.router.navigate(['/sign-in'])
       }
     })
+
+    this.http.getUserAddresses().subscribe(data => {
+      this.addresses = data;
+    }, error => {
+      if (error.status == 401) {
+        this.router.navigate(['/sign-in'])
+      }
+    })
   }
 
   redirect_to_home() {
@@ -36,6 +45,26 @@ export class HomeComponent {
 
   redirect_to_detail(id: string) {
     this.router.navigate([`/store/${id}`]);
+  }
+
+  getStoresByServiceId(id: string) {
+    this.http.getStoresByServiceId(id).subscribe(data => {
+      this.stores = data;
+    }, error => {
+      if (error.status == 401) {
+        this.router.navigate(['/sign-in'])
+      }
+    })
+  }
+
+  getNearbyStores(id: string) {
+    this.http.getNearbyStores(id).subscribe(data => {
+      this.stores = data;
+    }, error => {
+      if (error.status == 401) {
+        this.router.navigate(['/sign-in'])
+      }
+    })
   }
 
 }
